@@ -1,28 +1,16 @@
 const graphql = require('graphql');
+const { GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString } = graphql;
 const { dbQuery } = require('../utils/database');
-const { ProductType, ImageType } = require('../types/types');
-const { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLID, GraphQLInt, GraphQLString } = graphql;
+const { ImageType } = require('../types/types');
+const productQuery = require('../queries/product_query');
 
 
 const RootQuery = new GraphQLObjectType({
         name: 'RootQueryType',
         description: 'This is the root query',
         fields: ()=>({
-            products: {
-                type: new GraphQLList(ProductType),
-                async resolve(parent, args){
-                    let res = await dbQuery('SELECT * FROM products');
-                    return res;
-                }
-            },
-            product: {
-                type: ProductType,
-                args: {id: {type: GraphQLID}},
-                async resolve(parent, args){
-                    let res = await dbQuery(`SELECT * FROM PRODUCTS WHERE id = ${args.id}`);
-                    return res[0];
-                }
-            }
+            products: productQuery.products,
+            product: productQuery.product
         })
 }); 
 
