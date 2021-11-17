@@ -20,7 +20,8 @@ const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: ()=>({
         addProduct: productMutation.addProduct,
-        addImage: imageMutation.addImage 
+        addImage: imageMutation.addImage,
+        updateImage: imageMutation.updateImage 
     })
 })
 

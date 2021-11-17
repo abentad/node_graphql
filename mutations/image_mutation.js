@@ -18,4 +18,20 @@ const addImage = {
     }
 }
 
-module.exports = { addImage };
+const updateImage = {
+    type: ImageType,
+    args:{
+        imageId: {type: GraphQLInt},
+        id: {type: GraphQLInt},
+        url: {type: GraphQLString}
+    },
+    async resolve(parent, args){
+        let _ = await dbQuery(`UPDATE images SET id = ${args.id}, url = ${args.url} WHERE image_id = ${args.imageId}`);
+        console.log(_);
+        let id = _.insertId;
+        let res = await dbQuery(`SELECT * FROM images WHERE image_id = ${id}`);
+        return res[0];
+    }
+}
+
+module.exports = { addImage, updateImage };
