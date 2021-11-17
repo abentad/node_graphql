@@ -19,19 +19,27 @@ const addImage = {
 }
 
 const updateImage = {
-    type: ImageType,
+    type: GraphQLString,
     args:{
         imageId: {type: GraphQLInt},
         id: {type: GraphQLInt},
         url: {type: GraphQLString}
     },
     async resolve(parent, args){
-        let _ = await dbQuery(`UPDATE images SET id = ${args.id}, url = ${args.url} WHERE image_id = ${args.imageId}`);
-        console.log(_);
-        let id = _.insertId;
-        let res = await dbQuery(`SELECT * FROM images WHERE image_id = ${id}`);
-        return res[0];
+        let _ = await dbQuery(`UPDATE images SET id = '${args.id}', url = '${args.url}' WHERE image_id = '${args.imageId}'`);
+        return "Update Success.";
     }
 }
 
-module.exports = { addImage, updateImage };
+const deleteImage = {
+    type: GraphQLString,
+    args: {
+        imageId: {type: GraphQLInt}
+    },
+    async resolve(parent, args){
+        let _ = await dbQuery(`DELETE FROM images WHERE image_id = '${args.imageId}'`);
+        return "Remove Success.";
+    }
+}
+
+module.exports = { addImage, updateImage, deleteImage };

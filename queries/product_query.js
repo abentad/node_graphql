@@ -4,7 +4,7 @@ const { dbQuery } = require('../utils/database');
 const { GraphQLList, GraphQLID } = graphql;
 
 //get list of products
-const products = {
+const getProducts = {
     type: new GraphQLList(ProductType),
     async resolve(parent, args){
         let res = await dbQuery('SELECT * FROM products');
@@ -13,7 +13,7 @@ const products = {
 }
 
 //get specific product
-const product = {
+const getProduct = {
     type: ProductType,
     args: {id: {type: GraphQLID}},
     async resolve(parent, args){
@@ -23,4 +23,4 @@ const product = {
 }
 
 
-module.exports = { products, product };
+module.exports = { getProducts, getProduct };

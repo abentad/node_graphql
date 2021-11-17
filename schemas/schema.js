@@ -11,8 +11,8 @@ const RootQuery = new GraphQLObjectType({
         name: 'RootQueryType',
         description: 'This is the root query',
         fields: ()=>({
-            products: productQuery.products,
-            product: productQuery.product
+            products: productQuery.getProducts,
+            product: productQuery.getProduct
         })
 }); 
 
@@ -21,7 +21,8 @@ const Mutation = new GraphQLObjectType({
     fields: ()=>({
         addProduct: productMutation.addProduct,
         addImage: imageMutation.addImage,
-        updateImage: imageMutation.updateImage 
+        updateImage: imageMutation.updateImage,
+        deleteImage: imageMutation.deleteImage 
     })
 })
 
