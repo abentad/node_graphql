@@ -1,0 +1,32 @@
+# mutation{
+#   addImage(id: 97, url: "uploads/products/product_1636640775542_7951.jpg"){
+#     url
+#   }
+# }
+# {
+#   products{
+#     name
+#   }
+# }
+
+mutation{
+  # addImage(id: 97, url: "uploads/products/product_1636640775542_7951.jpg"){
+  #   url
+  # }
+  addProduct(
+    isPending: "false",
+    views: 2,
+    name: "chair",
+    price: "300",
+    description: "some none sense description about none sense that doesnot matter at all to the public.",
+    category: "Accessory",
+    image: "uploads/products/product_1636640775542_7951.jpg",
+    datePosted: "2021-11-11 17:26:15.389866",
+    posterId: "19",
+    posterName: "abeni",
+    posterProfileAvatar: "uploads/profiles/profile_16362776228216945.jpg",
+    posterPhoneNumber: "934171620"
+  ){
+    name
+  }
+}
