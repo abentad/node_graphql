@@ -1,8 +1,7 @@
 const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLNonNull } = graphql;
-const { dbQuery } = require('../utils/database');
-const { ImageType } = require('../types/types');
 const productQuery = require('../queries/product_query');
+const userQuery = require('../queries/user_query');
 const productMutation = require('../mutations/product_mutation');
 const imageMutation = require('../mutations/image_mutation');
 
@@ -12,7 +11,8 @@ const RootQuery = new GraphQLObjectType({
         description: 'This is the root query',
         fields: ()=>({
             products: productQuery.getProducts,
-            product: productQuery.getProduct
+            product: productQuery.getProduct,
+            user: userQuery.getUser
         })
 }); 
 

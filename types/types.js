@@ -2,6 +2,26 @@ const graphql = require('graphql');
 const { GraphQLID, GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLList } = graphql;
 const { dbQuery } = require('../utils/database');
 
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: ()=>({
+        deviceToken: {type: GraphQLString},
+        username: {type: GraphQLString},
+        email: {type: GraphQLString},
+        phoneNumber: {type: GraphQLString},
+        password: {type: GraphQLString},
+        profile_image: {type: GraphQLString},
+        dateJoined: {type: GraphQLString},
+        products:{
+            type: new GraphQLList(ProductType),
+            async resolve(parent, args){
+                let res = await dbQuery(`SELECT * FROM products WHERE posterId = ${parent.id}`);
+                return res;
+            }
+        }
+    })
+})
+
 const ProductType = new GraphQLObjectType({
     name: 'Product',
     fields: ()=>({
@@ -37,4 +57,4 @@ const ImageType = new GraphQLObjectType({
     })
 });
 
-module.exports = { ProductType, ImageType };
+module.exports = { UserType, ProductType, ImageType };
