@@ -36,12 +36,4 @@ const ImageType = new GraphQLObjectType({
     })
 });
 
-const UsersType = new GraphQLObjectType({
-    name: 'User',
-    fields: ()=>({
-        id: {type: GraphQLInt},
-        url: {type: GraphQLString}
-    })
-});
-
-module.exports = {ProductType};
+module.exports = { ProductType, ImageType };
